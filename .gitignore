@@ -494,3 +494,5 @@ modules/patches/hvcj/famicom/patches_ips/hvcj/stillmissing
 *.hsqs
 backup/*
 wifi.code-workspace
+VERSION
+build_hmod.sh
