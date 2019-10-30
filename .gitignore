@@ -496,3 +496,4 @@ backup/*
 wifi.code-workspace
 VERSION
 build_hmod.sh
+temp/
