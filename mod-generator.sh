@@ -99,7 +99,11 @@ info)
     "Platform: ${PLATFORM} ${ARCHITECTURE}" \
     "Maintainer: ${MAINTAINER}" \
     "Description: ${PKG_PRETTY_NAME}"
-    cat readme.md
+  cat readme.md
+  ;;
+dry-run)
+  clean
+  modCreation
   ;;
 *)
   clean
