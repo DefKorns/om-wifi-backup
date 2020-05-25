@@ -16,7 +16,7 @@
 #  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # shellcheck disable=SC2001
-PKG_PRETTY_NAME="Options Menu: Wifi Backup"
+PKG_PRETTY_NAME="Wifi Backup"
 PKG_NAME="om-wifi-backup"
 PKG_CREATOR="DefKorns"
 PKG_CATEGORY="Options Menu"
@@ -51,7 +51,7 @@ modCreation() {
   {
     printf "%s\n" \
       "---" \
-      "Name: ${PKG_NAME}" \
+      "Name: ${PKG_PRETTY_NAME}" \
       "Creator: ${PKG_CREATOR}" \
       "Category: ${PKG_CATEGORY}" \
       "Version: ${VERSION}" \
@@ -66,17 +66,13 @@ modCreation() {
 
   cd "${PKG_TARGET}" || exit
   tar -czf "${HMOD}" -- *
-  rm -r "${DEV_DIR}/${PKG_TARGET:?}"
+  rm -r "${DEV_DIR:?}/${PKG_TARGET}"
   touch "${HMOD}"
 
 }
 
-checkVersion() {
-  echo "$@" | awk -F. '{ printf("%d%03d%03d%03d\n", $1,$2,$3,$4); }'
-}
-
 clean() {
-  rm -rf "${DEV_DIR}/${PKG_TARGET:?}/" "${DEV_DIR}/${PKG_TARGET}.mod"
+  rm -rf "${DEV_DIR:?}/${PKG_TARGET:?}/" "${DEV_DIR:?}/${PKG_TARGET}.mod"
 }
 
 case "$1" in
@@ -103,14 +99,12 @@ info)
     "Platform: ${PLATFORM} ${ARCHITECTURE}" \
     "Maintainer: ${MAINTAINER}" \
     "Description: ${PKG_PRETTY_NAME}"
+    cat readme.md
   ;;
 *)
   clean
   modCreation
   echo "${NEXT_PATCH_VERSION}" >"${VERSION_FILE}"
-  if [ "$(checkVersion "${VERSION}")" -gt "$(checkVersion "${LAST_TAG}")" ]; then
-    git tag "$VERSION"
-  fi
   ;;
 esac
 #EOF
