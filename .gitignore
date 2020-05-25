@@ -497,3 +497,5 @@ wifi.code-workspace
 VERSION
 build_hmod.sh
 temp/
+om-wifi-backup_SNESCE
+*.hmod
